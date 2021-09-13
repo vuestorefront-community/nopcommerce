@@ -1,7 +1,7 @@
 module.exports = {
   integrations: {
-    <% INTEGRATION %>: {
-      location: '@vue-storefront/<% INTEGRATION %>-api/server',
+    nopcommerce: {
+      location: '@vue-storefront/nopcommerce-api/server',
       configuration: {}
     }
   }
