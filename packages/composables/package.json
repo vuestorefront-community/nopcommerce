@@ -16,7 +16,7 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/nopcommerce-api": "~2.4.1",
+    "@vue-storefront/nopcommerce-api": "~0.0.1",
     "@vue-storefront/core": "~2.4.1"
   },
   "devDependencies": {
