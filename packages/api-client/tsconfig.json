@@ -12,9 +12,12 @@
     "noEmitHelpers": true,
     "sourceMap": true,
     "declaration": true,
+    "declarationDir": "./lib",
+    "declarationMap": true,
     "skipLibCheck": true,
     "forceConsistentCasingInFileNames": true,
-    "baseUrl": "./",
+    "baseUrl": "./*",
     "preserveSymlinks": true,
+    "allowUmdGlobalAccess": true
   }
 }

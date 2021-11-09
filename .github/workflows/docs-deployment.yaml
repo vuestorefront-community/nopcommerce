@@ -26,9 +26,9 @@ jobs:
           registry: registry.storefrontcloud.io
           username: ${{ secrets.DOCS_CLOUD_USERNAME }}
           password: ${{ secrets.DOCS_CLOUD_PASSWORD }}
-          workdir: .
-          dockerfile: ./.vuestorefrontcloud/docker/docs/Dockerfile
-          buildoptions: "--compress"
+          workdir: docs
+          dockerfile: ../.vuestorefrontcloud/docker/docs/Dockerfile
+          buildoptions: '--compress'
 
   deploy:
     runs-on: ubuntu-latest
@@ -45,8 +45,8 @@ jobs:
         name: Create GitHub deployment
         id: deployment
         with:
-          token: "${{ github.token }}"
-          target_url: https://docs.europe-west1.gcp.storefrontcloud.io/nopcommerce
+          token: '${{ github.token }}'
+          target_url: https://docs.europe-west1.gcp.storefrontcloud.io/v2
           environment: production
           initial_status: in_progress
       - name: Deploy on docs.europe-west1.gcp.storefrontcloud.io/nopcommerce
@@ -61,17 +61,17 @@ jobs:
         if: success()
         uses: chrnorm/deployment-status@releases/v1
         with:
-          token: "${{ github.token }}"
-          target_url: https://docs.europe-west1.gcp.storefrontcloud.io/nopcommerce
-          state: "success"
+          token: '${{ github.token }}'
+          target_url: https://docs.europe-west1.gcp.storefrontcloud.io/v2
+          state: 'success'
           description: Congratulations! The deploy is done.
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}
       - name: Update deployment status (failure)
         if: failure()
         uses: chrnorm/deployment-status@releases/v1
         with:
-          token: "${{ github.token }}"
-          target_url: https://docs.europe-west1.gcp.storefrontcloud.io/nopcommerce
+          token: '${{ github.token }}'
+          target_url: https://docs.europe-west1.gcp.storefrontcloud.io/v2
           description: Unfortunately, the instance hasn't been updated.
-          state: "failure"
+          state: 'failure'
           deployment_id: ${{ steps.deployment.outputs.deployment_id }}

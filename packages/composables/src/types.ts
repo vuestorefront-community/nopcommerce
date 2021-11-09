@@ -1,6 +1,6 @@
-import {
-  ProductsSearchParams
-} from '@vue-storefront/core';
+import { ProductsSearchParams } from '@vue-storefront/core';
+import { CatalogProductsCommandDto } from '@vue-storefront/nopcommerce-api/gen';
+import { Facet } from '@vue-storefront/nopcommerce-api/src';
 
 export type TODO = any;
 
@@ -8,7 +8,10 @@ export type UseBillingAddParams = TODO;
 
 export type UseCategorySearchParams = TODO;
 
-export type UseFacetSearchParams = TODO;
+export type UseFacetSearchParams = {
+  CatalogProductsCommandDto: CatalogProductsCommandDto;
+  Facet: Facet;
+};
 
 export type UseProductSearchParams = ProductsSearchParams;
 

@@ -1,4 +1,4 @@
-name: "❓ Question / Basic Issue"
+name: '❓ Question / Basic Issue'
 description: |
   Do you have a question on the implementation or a basic issue
 labels:
@@ -14,7 +14,7 @@ body:
       required: true
   - type: input
     attributes:
-      label: What version of nopCommerce integration are you using?
+      label: What version of nopcommerce integration are you using?
       description: 'For example: 1.0.0'
     validations:
       required: true

@@ -1,6 +1,16 @@
 import webpack from 'webpack';
 import { VSF_LOCALE_COOKIE } from '@vue-storefront/core';
 import theme from './themeConfig';
+import { getRoutes } from './routes';
+import middleware from './middleware.config';
+
+const {
+  integrations: {
+    nopcommerce: {
+      configuration: { cookies }
+    }
+  }
+} = middleware;
 
 export default {
   server: {
@@ -13,13 +23,14 @@ export default {
     meta: [
       { charset: 'utf-8' },
       { name: 'viewport', content: 'width=device-width, initial-scale=1' },
-      { hid: 'description', name: 'description', content: process.env.npm_package_description || '' }
+      {
+        hid: 'description',
+        name: 'description',
+        content: process.env.npm_package_description || ''
+      }
     ],
     link: [
-      { rel: 'icon',
-        type: 'image/x-icon',
-        href: '/favicon.ico'
-      },
+      { rel: 'icon', type: 'image/x-icon', href: '/favicon.ico' },
       {
         rel: 'preconnect',
         href: 'https://fonts.gstatic.com',
@@ -39,43 +50,43 @@ export default {
     // to core
     '@nuxt/typescript-build',
     '@nuxtjs/style-resources',
-    ['@vue-storefront/nuxt', {
-      // @core-development-only-start
-      coreDevelopment: true,
-      // @core-development-only-end
-      useRawSource: {
-        dev: [
-          '@vue-storefront/nopcommerce',
-          '@vue-storefront/core'
-        ],
-        prod: [
-          '@vue-storefront/nopcommerce',
-          '@vue-storefront/core'
-        ]
-      }
-    }],
-    // @core-development-only-start
-    ['@vue-storefront/nuxt-theme', {
-      generate: {
-        replace: {
-          apiClient: '@vue-storefront/nopcommerce-api',
-          composables: '@vue-storefront/nopcommerce'
+    [
+      '@vue-storefront/nuxt',
+      {
+        // @core-development-only-start
+        coreDevelopment: true,
+        // @core-development-only-end
+        useRawSource: {
+          dev: ['@vue-storefront/nopcommerce', '@vue-storefront/core'],
+          prod: ['@vue-storefront/nopcommerce', '@vue-storefront/core']
         }
       }
-    }],
+    ],
+    // @core-development-only-start
+    [
+      '@vue-storefront/nuxt-theme',
+      {
+        generate: {
+          replace: {
+            apiClient: '@vue-storefront/nopcommerce-api',
+            composables: '@vue-storefront/nopcommerce'
+          }
+        }
+      }
+    ],
     // @core-development-only-end
     /* project-only-start
     ['@vue-storefront/nuxt-theme'],
     project-only-end */
-    ['@vue-storefront/nopcommerce/nuxt', {}]
+    [
+      '@vue-storefront/nopcommerce/nuxt',
+      {
+        cookies
+      }
+    ]
   ],
   // Modules: https://go.nuxtjs.dev/config-modules
-  modules: [
-    'nuxt-i18n',
-    'cookie-universal-nuxt',
-    'vue-scrollto/nuxt',
-    '@vue-storefront/middleware/nuxt'
-  ],
+  modules: ['nuxt-i18n', 'cookie-universal-nuxt', 'vue-scrollto/nuxt', '@vue-storefront/middleware/nuxt'],
   i18n: {
     currency: 'USD',
     country: 'US',
@@ -102,12 +113,16 @@ export default {
       numberFormats: {
         en: {
           currency: {
-            style: 'currency', currency: 'USD', currencyDisplay: 'symbol'
+            style: 'currency',
+            currency: 'USD',
+            currencyDisplay: 'symbol'
           }
         },
         de: {
           currency: {
-            style: 'currency', currency: 'EUR', currencyDisplay: 'symbol'
+            style: 'currency',
+            currency: 'EUR',
+            currencyDisplay: 'symbol'
           }
         }
       }
@@ -117,7 +132,11 @@ export default {
     }
   },
   styleResources: {
-    scss: [require.resolve('@storefront-ui/shared/styles/_helpers.scss', { paths: [process.cwd()] })]
+    scss: [
+      require.resolve('@storefront-ui/shared/styles/_helpers.scss', {
+        paths: [process.cwd()]
+      })
+    ]
   },
   // Build Configuration: https://go.nuxtjs.dev/config-build
   build: {
@@ -127,9 +146,7 @@ export default {
         ['@babel/plugin-proposal-private-methods', { loose: true }]
       ]
     },
-    transpile: [
-      'vee-validate/dist/rules'
-    ],
+    transpile: ['vee-validate/dist/rules'],
     plugins: [
       new webpack.DefinePlugin({
         'process.VERSION': JSON.stringify({
@@ -138,16 +155,26 @@ export default {
           lastCommit: process.env.LAST_COMMIT || ''
         })
       })
-    ]
+    ],
+    sourceMap: true,
+    extend(config, { isClient }) {
+      // Extend only webpack config for client-bundle
+      if (isClient) {
+        config.devtool = 'source-map';
+      }
+    }
   },
   router: {
     middleware: ['checkout'],
-    scrollBehavior (_to, _from, savedPosition) {
+    scrollBehavior(_to, _from, savedPosition) {
       if (savedPosition) {
         return savedPosition;
       } else {
         return { x: 0, y: 0 };
       }
+    },
+    extendRoutes(routes) {
+      getRoutes(`${__dirname}/_theme`).forEach((route) => routes.unshift(route));
     }
   },
   publicRuntimeConfig: {

@@ -1,5 +1,7 @@
 import nodeResolve from '@rollup/plugin-node-resolve';
 import typescript from 'rollup-plugin-typescript2';
+import rollupJson from '@rollup/plugin-json';
+import commonjs from '@rollup/plugin-commonjs';
 import pkg from './package.json';
 import { generateBaseConfig } from '../../rollup.base.config';
 
@@ -16,11 +18,21 @@ const server = {
   ],
   external: [
     ...Object.keys(pkg.dependencies || {}),
-    ...Object.keys(pkg.peerDependencies || {})
+    ...Object.keys(pkg.peerDependencies || {}),
+    'axios'
   ],
   plugins: [
     nodeResolve({
-      extensions
+      extensions,
+      jsnext: true,
+      preferBuiltins: true,
+      browser: true
+    }),
+    rollupJson(),
+    commonjs({
+      include: /node_modules/,
+      dynamicRequireTargets: ['/node_modules/'],
+      defaultIsModuleExports: true
     }),
     typescript({
       // eslint-disable-next-line global-require
@@ -30,7 +42,4 @@ const server = {
   ]
 };
 
-export default [
-  generateBaseConfig(pkg),
-  server
-];
+export default [generateBaseConfig(pkg), server];

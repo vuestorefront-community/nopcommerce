@@ -1,8 +1,10 @@
 {
-  "endOfLine": "lf",
+  "printWidth": 150,
+  "endOfLine": "crlf",
   "semi": true,
   "singleQuote": true,
   "arrowParens": "always",
   "tabWidth": 2,
-  "bracketSpacing": true
+  "bracketSpacing": true,
+  "trailingComma" : "none"
 }

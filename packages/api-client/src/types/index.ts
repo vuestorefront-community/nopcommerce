@@ -1,8 +1,14 @@
+export * from './../../gen/model';
+
+export * from './Api';
+export * from './AuthenticationToken';
+export * from './ClientInstance';
+export * from './Configuration';
+export * from './Context';
+
+import { CatalogProductsModelDto, ProductDetailsModelDto, CategoryModelDto } from './';
+
 export type TODO = unknown;
-
-export type Setttings = TODO;
-
-export type Endpoints = TODO;
 
 export type BillingAddress = TODO;
 
@@ -14,7 +20,14 @@ export type Category = TODO;
 
 export type Coupon = TODO;
 
-export type Facet = TODO;
+/* eslint-disable camelcase */
+export type Facet = {
+  template_view_path: string | null;
+  catalog_products_model: CatalogProductsModelDto;
+  catalog_model: CategoryModelDto;
+  products: Array<ProductDetailsModelDto>;
+};
+/* eslint-enable camelcase */
 
 export type FacetSearchCriteria = TODO;
 

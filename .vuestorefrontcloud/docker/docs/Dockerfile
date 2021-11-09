@@ -4,12 +4,11 @@ WORKDIR /var/www
 
 COPY . .
 
-RUN cd docs \
-  && npm install \
+RUN npm install \
   && sed -i "s/base: '\/',/base: '\/nopcommerce\/',/g" ./.vuepress/config.js \
   && cat ./.vuepress/config.js \
   && npm run build
 
 FROM nginx
 
-COPY --from=build /var/www/docs/.vuepress/dist /usr/share/nginx/html/nopcommerce
+COPY --from=build /var/www/.vuepress/dist /usr/share/nginx/html/nopcommerce

@@ -1,0 +1,21 @@
+{
+  "$schema": "node_modules/@openapitools/openapi-generator-cli/config.schema.json",
+  "spaces": 2,
+  "generator-cli": {
+    "version": "5.2.1",
+    "generators": {
+      "generator": {
+        "glob":"import/nopCommerceAPI.{json,yaml}",
+        "output": "gen",
+        "generatorName": "typescript-axios",
+        "apiPackage": "api",
+        "modelPackage": "model",
+        "enablePostProcessFile": true,
+        "additionalProperties": {
+          "withSeparateModelsAndApi": "true",
+          "modelPropertyNaming": "snake_case"
+        }
+      }
+    }
+  }
+}

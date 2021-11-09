@@ -1,0 +1,20 @@
+{
+	"folders": [
+		{
+			"name": "root",
+			"path": ".",
+		},
+		{
+			"path": "./packages/api-client"
+		},
+		{
+			"path": "./packages/composables"
+		},
+		{
+			"path": "./packages/theme"
+		},
+		{
+			"path": "./node_modules/@storefront-ui",
+		}
+	],
+}

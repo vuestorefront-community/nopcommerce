@@ -1,5 +1,7 @@
 **/node_modules/**/*
 **/lib/*
+packages/api-client/gen
+packages/api-client/src/api
 packages/theme/_theme
 packages/theme/.nuxt
 **/tests/*

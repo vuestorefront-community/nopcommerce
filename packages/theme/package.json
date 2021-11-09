@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/nopcommerce-theme",
-  "version": "2.4.1",
+  "version": "0.0.1",
   "private": true,
   "scripts": {
     "build": "nuxt build -m",
@@ -10,7 +10,7 @@
     "lint": "eslint . --ext .ts,.vue",
     "lint:fix": "eslint . --ext .ts,.vue --fix",
     "precommit": "lint-staged",
-    "start": "nuxt start",
+    "start": "NODE_ENV=production nuxt start",
     "test": "jest",
     "test:e2e": "cypress open --config-file tests/e2e/cypress.json",
     "test:e2e:generate:report": "yarn -s mochawesome-merge \"tests/e2e/report/*.json\" > \"tests/e2e/report.json\" && yarn -s marge tests/e2e/report.json -o \"tests/e2e/report\"",
@@ -21,11 +21,11 @@
   "dependencies": {
     "@nuxtjs/pwa": "^3.3.5",
     "@nuxtjs/style-resources": "^1.2.1",
-    "@storefront-ui/vue": "^0.10.8",
+    "@storefront-ui/vue": ">=0.10.8 <0.10.71 || ^0.10.72",
     "@vue-storefront/middleware": "~2.4.1",
+    "@vue-storefront/nopcommerce": "~2.4.1",
     "@vue-storefront/nuxt": "~2.4.1",
     "@vue-storefront/nuxt-theme": "~2.4.1",
-    "@vue-storefront/nopcommerce": "~2.4.1",
     "cookie-universal-nuxt": "^2.1.5",
     "core-js": "^3.16.1",
     "nuxt": "^2.15.7",

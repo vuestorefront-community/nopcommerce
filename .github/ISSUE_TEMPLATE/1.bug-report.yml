@@ -1,4 +1,4 @@
-name: "🐛 Bug report"
+name: '🐛 Bug report'
 description: Report errors or unexpected behavior
 labels:
   - bug
@@ -41,7 +41,7 @@ body:
       required: false
   - type: input
     attributes:
-      label: What version of nopCommerce integration are you using?
+      label: What version of nopcommerce integration are you using?
       description: 'For example: 1.0.0'
     validations:
       required: true

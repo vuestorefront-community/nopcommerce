@@ -2,7 +2,6 @@
 
 Yeay! You want to contribute to @vuestorefront/nopcommerce. That's amazing! To smoothen everyone's experience involved with the project please take note of the following guidelines and rules.
 
-
 ## Found an Issue?
 
 Thank you for reporting any issues you find. We do our best to test and make @vuestorefront/nopcommerce as solid as possible, but any reported issue is a real help.

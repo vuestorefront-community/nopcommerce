@@ -2,19 +2,19 @@
 <img src="https://blog.vuestorefront.io/wp-content/uploads/2020/01/1QU9F6hQlFyHsJIbsdmt6FA.png" height="80px"/>  
 </div>
 
-## Vue Storefront 2 integration with nopCommerce
+## Vue Storefront 2 integration with nopcommerce
 
-------
+---
 
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
-
 
 ## How to start if you want to try out the integration
 
 ```
 yarn global add @vue-storefront/cli
 ```
+
 ```
 vsf init <project_name> && cd <project_name> && yarn && yarn dev
 ```

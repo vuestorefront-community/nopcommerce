@@ -1,0 +1,13 @@
+{
+    "configurations": [
+      {
+        "name": "Attach to VSF server",
+        "type": "node",
+        "request": "attach",
+        "port": 9229,
+        "cwd": "${workspaceFolder}",
+        "trace": true,
+        "sourceMaps": true
+      }
+    ]
+  }

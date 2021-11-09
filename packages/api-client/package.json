@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/nopcommerce-api",
-  "version": "2.4.1",
+  "version": "0.0.1",
   "private": true,
   "sideEffects": false,
   "server": "server/index.js",
@@ -14,14 +14,19 @@
     "prepublish": "yarn build",
     "test": "jest",
     "update:check": "ncu",
-    "update:update": "ncu -u"
+    "update:update": "ncu -u",
+    "generate": "openapi-generator-cli generate",
+    "generate:wrapped": "node -e 'require(\"./server/index\").generate()'"
   },
   "dependencies": {
     "@vue-storefront/core": "~2.4.1"
   },
   "devDependencies": {
     "rollup-plugin-typescript2": "^0.30.0",
-    "@rollup/plugin-node-resolve": "^13.0.0"
+    "@rollup/plugin-node-resolve": "^13.0.0",
+    "@rollup/plugin-commonjs":"^20.0.0",
+    "@rollup/plugin-json":"^4.1.0",
+    "@openapitools/openapi-generator-cli": "^2.4.1"
   },
   "files": [
     "lib/**/*"

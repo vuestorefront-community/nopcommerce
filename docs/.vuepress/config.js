@@ -1,29 +1,31 @@
 module.exports = {
-  title: 'Vue Storefront 2 for nopCommerce',
+  title: 'Vue Storefront 2 for nopcommerce',
   base: '/',
-  description: 'Documentation for the nopCommerce connector for Vue Storefront 2',
-  head: [
-    ['link', { rel: 'icon', href: '/favicon.png' }]
-  ],
+  description:
+    'Documentation for the nopcommerce connector for Vue Storefront 2',
+  head: [['link', { rel: 'icon', href: '/favicon.png' }]],
   configureWebpack: (config) => {
-    config.module.rules = config.module.rules.map(rule => ({
+    config.module.rules = config.module.rules.map((rule) => ({
       ...rule,
-      use: rule.use && rule.use.map(useRule => ({
-        ...useRule,
-        options: useRule.loader === 'url-loader' ?
-          /**
+      use:
+        rule.use &&
+        rule.use.map((useRule) => ({
+          ...useRule,
+          options:
+            useRule.loader === 'url-loader'
+              ? /**
             Hack for loading images properly.
             ref: https://github.com/vuejs/vue-loader/issues/1612#issuecomment-559366730
            */
-          {  ...useRule.options, esModule: false } :
-          useRule.options
-      }))
-    }))
+                { ...useRule.options, esModule: false }
+              : useRule.options,
+        })),
+    }));
   },
   themeConfig: {
     nav: [
       { text: 'Vue Storefront', link: 'https://vuestorefront.io/' },
-      { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' }
+      { text: 'Core Documentation', link: 'https://docs.vuestorefront.io/v2/' },
     ],
     sidebar: [
       {
@@ -34,8 +36,8 @@ module.exports = {
           ['/guide/getting-started', 'Getting started'],
           ['/guide/configuration', 'Configuration'],
           ['/guide/about', 'About'],
-        ]
+        ],
       },
-    ]
-  }
-}
+    ],
+  },
+};
