@@ -25,7 +25,7 @@ jobs:
         run: |
           cd 'packages/theme'
           yarn install --production
-          yarn build:theme
+          yarn build
           yarn test
 
       - name: Zip artifact for deployment
