@@ -24,7 +24,7 @@ jobs:
       - name: yarn install, build, and test
         run: |
           cd 'packages/theme'
-          yarn install
+          yarn install --production
           yarn build:theme
           yarn test
 
