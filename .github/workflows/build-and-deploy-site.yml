@@ -24,9 +24,8 @@ jobs:
       - name: yarn install, build, and test
         run: |
           cd 'packages/theme'
-          yarn install --production
+          yarn install
           yarn build
-          yarn test
 
       - name: Zip artifact for deployment
         run: zip nopcommerce-vuestorefront-release.zip ./* -r
