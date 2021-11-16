@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/nopcommerce-api",
-  "version": "0.0.2",
+  "version": "0.0.3",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",
@@ -29,7 +29,8 @@
     "@openapitools/openapi-generator-cli": "^2.4.1"
   },
   "files": [
-    "lib/**/*"
+    "lib/**/*",
+    "server/**/*"
   ],
   "publishConfig": {
     "access": "public"
