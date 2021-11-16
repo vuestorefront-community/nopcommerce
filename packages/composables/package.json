@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/nopcommerce",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "private": false,
   "sideEffects": false,
   "main": "lib/index.cjs.js",
@@ -16,7 +16,7 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/nopcommerce-api": "~0.0.1",
+    "@vue-storefront/nopcommerce-api": "~0.0.2",
     "@vue-storefront/core": "~2.4.1"
   },
   "devDependencies": {
@@ -28,7 +28,7 @@
   },
   "files": [
     "lib/**/*",
-	"nuxt/**/*"
+	  "nuxt/**/*"
   ],
   "publishConfig": {
     "access": "public"
