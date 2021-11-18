@@ -23,12 +23,11 @@ jobs:
 
       - name: yarn install, build, and test
         run: |
-          cd 'packages/theme'
           yarn install
           yarn build
 
       - name: Zip artifact for deployment
-        run: zip nopcommerce-vuestorefront-release.zip ./* -r
+        run: zip nopcommerce-vuestorefront-release.zip ./packages/theme/* -r
 
       - name: Upload artifact for deployment job
         uses: actions/upload-artifact@v2
