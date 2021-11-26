@@ -1,3 +1,16 @@
+<div align="center">
+<img src="https://user-images.githubusercontent.com/1626923/137092657-fb398d20-b592-4661-a1f9-4135db0b61d5.png" height="80px"/>  <img src="https://www.nopcommerce.com/Themes/OfficialSite/Content/images/logo.png" height="80px"/>
+</div>
+
+## Vue Storefront 2 integration with nopCommerce
+
+This project is a nopCommerce integration for Vue Storefront 2.
+This integration is developed by the superheroes from [Majako](https://www.majako.net) ❤️
+<div align="center">
+<img src="https://www.majako.se/assets/Majako.svg" height="80px"/>
+</div>
+<hr />
+
 # Boilerplate for Vue Storefront 2 eCommerce integration
 
 This is a template, to use it you must rename the project changing the `{YOUR INTEGRATION NAME}` to the name of the integration you are developing. The name must be in lowercase and without any special characters.
@@ -5,16 +18,6 @@ This is a template, to use it you must rename the project changing the `{YOUR IN
 ```sh
 grep -rl 'nopcommerce' ./ | xargs sed -i '' 's/nopcommerce/{YOUR INTEGRATION NAME}/g'
 ```
-
----
-
-<div align="center">
-<img src="https://blog.vuestorefront.io/wp-content/uploads/2020/01/1QU9F6hQlFyHsJIbsdmt6FA.png" height="80px"/>  
-</div>
-
-## Vue Storefront 2 integration with nopcommerce
-
-To learn how to build your integration, see our [Integration guide](https://docs.vuestorefront.io/v2/integrate/integration-guide.html).
 
 ---
 
