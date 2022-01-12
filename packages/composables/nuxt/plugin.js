@@ -22,9 +22,11 @@ export default integrationPlugin(({ app, res, req, integration }) => {
       };
       const auth = await app.$vsf.$nopcommerce.api.getToken({ authenticateCustomerRequest });
       setCookie(authenticationCookieName, JSON.stringify(auth));
+
+      return null;
     }
 
-    //const customer = await app.$vsf.$nopcommerce.api.info({ authenticateCustomerRequest });
+    // const customer = await app.$vsf.$nopcommerce.api.info({ authenticateCustomerRequest });
   };
   const getCustomerToken = () => getCookies(customerCookieName);
 

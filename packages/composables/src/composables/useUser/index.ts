@@ -9,16 +9,29 @@ import type {
   UseUserRegisterParams as RegisterParams
 } from '../../types';
 
+const logIn = async (context: Context, username: string, password: string): Promise<User> => {
+  const tokenResponse = await context.$nopcommerce.api.authenticateGetTokenPost({
+    authenticateCustomerRequest: {
+      email: username,
+      password: password
+    }
+  });
+
+  const user: User = {
+    token: (tokenResponse) ? tokenResponse.token : null
+  };
+
+  return user;
+};
+
 const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   load: async (context: Context) => {
-    console.log('Mocked: useUser.load');
-    return {};
+    return await context.$nopcommerce.config.state.getCurrentCustomer();
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   logOut: async (context: Context) => {
-    console.log('Mocked: useUser.logOut');
+    await context.$nopcommerce.api.customerLogoutGet();
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -29,14 +42,29 @@ const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   register: async (context: Context, { email, password, firstName, lastName }) => {
-    console.log('Mocked: useUser.register');
-    return {};
+    const response = await context.$nopcommerce.api.customerRegisterPost({
+      returnUrl: '/',
+      registerModelDtoBaseModelDtoRequest: {
+        model: {
+          email: email,
+          password: password,
+          first_name: firstName,
+          last_name: lastName
+        },
+        form: {}
+      }
+    });
+
+    if (response === '') {
+      throw new Error('Could not register user, please check the form and try again.');
+    }
+
+    return logIn(context, email, password);
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   logIn: async (context: Context, { username, password }) => {
-    console.log('Mocked: useUser.logIn');
-    return {};
+    return logIn(context, username, password);
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
