@@ -18,6 +18,10 @@ const logIn = async (context: Context, username: string, password: string): Prom
     }
   });
 
+  if (!response) {
+    throw new Error('Login was unsuccessful.');
+  }
+
   return response;
 };
 
