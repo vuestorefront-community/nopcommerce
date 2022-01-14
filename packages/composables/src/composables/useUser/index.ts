@@ -3,25 +3,21 @@ import {
   useUserFactory,
   UseUserFactoryParams
 } from '@vue-storefront/core';
-import type { User } from '@vue-storefront/nopcommerce-api';
+import type { User, AuthenticateResponse, RegisterModelDto } from '@vue-storefront/nopcommerce-api';
 import type {
   UseUserUpdateParams as UpdateParams,
   UseUserRegisterParams as RegisterParams
 } from '../../types';
 
-const logIn = async (context: Context, username: string, password: string): Promise<User> => {
-  const tokenResponse = await context.$nopcommerce.api.authenticateGetTokenPost({
+const logIn = async (context: Context, username: string, password: string): Promise<AuthenticateResponse> => {
+  const response: AuthenticateResponse = await context.$nopcommerce.api.authenticateGetTokenPost({
     authenticateCustomerRequest: {
       email: username,
       password: password
     }
   });
 
-  const user: User = {
-    token: (tokenResponse) ? tokenResponse.token : null
-  };
-
-  return user;
+  return response;
 };
 
 const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
@@ -42,7 +38,7 @@ const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   register: async (context: Context, { email, password, firstName, lastName }) => {
-    const response = await context.$nopcommerce.api.customerRegisterPost({
+    const response: RegisterModelDto = await context.$nopcommerce.api.customerRegisterPost({
       returnUrl: '/',
       registerModelDtoBaseModelDtoRequest: {
         model: {
