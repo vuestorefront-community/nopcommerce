@@ -3,47 +3,48 @@ import type { Order, OrderItem } from '@vue-storefront/nopcommerce-api';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getDate(order: Order): string {
-  return '';
+  return new Date(order?.created_on).toLocaleDateString() || '';
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getId(order: Order): string {
-  return '1';
+  return order.id;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getStatus(order: Order): string {
-  return '';
+  return order.shipping_status;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getPrice(order: Order): number | null {
-  return 0;
+  return order.order_total_value;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItems(order: Order): OrderItem[] {
-  return [];
+  console.log(order);
+  return order.items;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemSku(item: OrderItem): string {
-  return '';
+  return item.sku;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemName(item: OrderItem): string {
-  return '';
+  return item.attribute_info ? `${item.product_name} (${item.attribute_info})` : item.product_name;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemQty(item: OrderItem): number {
-  return 0;
+  return item.quantity;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItemPrice(item: OrderItem): number {
-  return 0;
+  return item.unit_price_value;
 }
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
@@ -52,8 +53,8 @@ function getFormattedPrice(price: number): string {
 }
 
 // eslint-disable-next-line
-function getOrdersTotal(orders: any): number {
-  return 1;
+function getOrdersTotal(orders: any): number {  
+  return orders.results.length;
 }
 
 export const orderGetters: UserOrderGetters<Order, OrderItem> = {
