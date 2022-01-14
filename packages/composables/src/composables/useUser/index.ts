@@ -4,6 +4,7 @@ import {
   UseUserFactoryParams
 } from '@vue-storefront/core';
 import type { User, AuthenticateResponse, RegisterModelDto } from '@vue-storefront/nopcommerce-api';
+import { CustomerInfoModelDto } from '@vue-storefront/nopcommerce-api/gen';
 import type {
   UseUserUpdateParams as UpdateParams,
   UseUserRegisterParams as RegisterParams
@@ -22,7 +23,8 @@ const logIn = async (context: Context, username: string, password: string): Prom
 
 const params: UseUserFactoryParams<User, UpdateParams, RegisterParams> = {
   load: async (context: Context) => {
-    return await context.$nopcommerce.config.state.getCurrentCustomer();
+    const response: CustomerInfoModelDto = await context.$nopcommerce.api.customerInfoGet();
+    return response ? response : null;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
