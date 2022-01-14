@@ -3,12 +3,17 @@ import {
   useForgotPasswordFactory,
   UseForgotPasswordFactoryParams
 } from '@vue-storefront/core';
+import type { PasswordRecoveryModelDto } from '@vue-storefront/nopcommerce-api';
 
 const factoryParams: UseForgotPasswordFactoryParams<any> = {
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
   resetPassword: async (context: Context, { email, customQuery }) => {
-    console.log('Mocked: resetPassword');
-    return {};
+    const response: PasswordRecoveryModelDto = await context.$nopcommerce.api.customerPasswordRecoverySendPost({
+      passwordRecoveryModelDto: {
+        email: email
+      }
+    });
+    return response;
   },
 
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
