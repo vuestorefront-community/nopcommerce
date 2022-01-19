@@ -1,4 +1,4 @@
-import { ProductsSearchParams } from '@vue-storefront/core';
+import { ProductsSearchParams, PlatformApi, Composable, ComputedProperty } from '@vue-storefront/core';
 import { CatalogProductsCommandDto } from '@vue-storefront/nopcommerce-api/gen';
 import { Facet } from '@vue-storefront/nopcommerce-api/src';
 
@@ -26,3 +26,15 @@ export type UseUserUpdateParams = TODO;
 export type UseUserRegisterParams = TODO;
 
 export type useUserOrderSearchParams = TODO;
+
+export interface UseReturnRequestErrors {
+  load: Error;
+}
+export interface UseReturnRequest<
+  RETURN_REQUEST,
+  API extends PlatformApi = any
+> extends Composable<API> {
+  getReturnRequest(params: { orderId: number }): Promise<RETURN_REQUEST>;
+  error: ComputedProperty<UseReturnRequestErrors>;
+  loading: ComputedProperty<boolean>;
+}
