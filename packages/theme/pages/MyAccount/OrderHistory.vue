@@ -40,10 +40,10 @@
             <SfTableData>{{orderGetters.getItemQty(item)}}</SfTableData>
             <SfTableData>{{$n(orderGetters.getItemPrice(item), 'currency')}}</SfTableData>
           </SfTableRow>
-          <SfButton @click="returnRequestOrderId = orderGetters.getId(currentOrder);currentOrder = null" class="sf-button--text">
-                {{ $t('Return item(s)') }}
-          </SfButton>
         </SfTable>
+        <SfButton @click="returnRequestOrderId = orderGetters.getId(currentOrder);currentOrder = null">
+          {{ $t('Return item(s)') }}
+        </SfButton>
       </div>
       <div v-if="currentOrder === null && returnRequestOrderId === null && returnRequestOrderId <= 0">
         <p class="message">
@@ -264,6 +264,7 @@ export default {
       --table-column-flex: 2;
     }
   }
+  margin-bottom: var(--spacer-sm);
 }
 .highlighted {
   box-sizing: border-box;
