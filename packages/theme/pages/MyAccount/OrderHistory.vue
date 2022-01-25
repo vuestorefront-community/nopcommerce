@@ -40,12 +40,12 @@
             <SfTableData>{{orderGetters.getItemQty(item)}}</SfTableData>
             <SfTableData>{{$n(orderGetters.getItemPrice(item), 'currency')}}</SfTableData>
           </SfTableRow>
-          <SfButton @click="loadOrderReturnQuantity(orderGetters.getId(currentOrder))" class="sf-button--text">
+          <SfButton @click="returnRequestOrderId = orderGetters.getId(currentOrder);currentOrder = null" class="sf-button--text">
                 {{ $t('Return item(s)') }}
           </SfButton>
         </SfTable>
       </div>
-      <div v-if="currentOrder === null && currentReturnOrder === null">
+      <div v-if="currentOrder === null && returnRequestOrderId === null && returnRequestOrderId <= 0">
         <p class="message">
           {{ $t('Details and status orders') }}
         </p>
@@ -88,57 +88,9 @@
         </SfTable>
         <p>Total orders - {{ totalOrders }}</p>
       </div>
-      <div v-if="currentReturnOrder">
-        <SfButton class="sf-button--text all-orders" @click="currentReturnOrder = null">All Orders</SfButton>
-        <div class="highlighted highlighted--total">
-          <SfProperty
-            name="Order ID"
-            :value="orderGetters.getId(currentReturnOrder)"
-            class="sf-property--full-width property"
-          />
-          <SfProperty
-            name="Date"
-            :value="orderGetters.getDate(currentReturnOrder)"
-            class="sf-property--full-width property"
-          />
-          <SfProperty
-            name="Status"
-            :value="orderGetters.getStatus(currentReturnOrder)"
-            class="sf-property--full-width property"
-          />
-          <SfProperty
-            name="Total"
-            :value="$n(orderGetters.getPrice(currentReturnOrder), 'currency')"
-            class="sf-property--full-width property"
-          />
-        </div>
-        <SfTable class="products">
-          <SfTableHeading>
-            <SfTableHeader class="products__name">{{ $t('Product') }}</SfTableHeader>
-            <SfTableHeader>{{ $t('Quantity') }}</SfTableHeader>
-            <SfTableHeader>{{ $t('Price') }}</SfTableHeader>
-          </SfTableHeading>
-          <SfTableRow v-for="(item, i) in orderGetters.getItems(currentReturnOrder)" :key="i">
-            <SfTableData class="products__name">
-              <nuxt-link :to="'/p/'+orderGetters.getItemSku(item)+'/'+orderGetters.getItemSku(item)">
-                {{orderGetters.getItemName(item)}}
-              </nuxt-link>
-            </SfTableData>
-            <SfTableData>
-              <SfSelect
-                style="max-width: 10rem;"
-                class="sf-select--underlined sf-select--return-qty"
-                :placeholder="$t('Selected quantity')"
-                @input="(value) => handleReturnQuantityChange(value, item)"
-              >
-                <SfSelectOption v-for="(qty, key) in Array.from(Array(orderGetters.getItemQty(item) + 1).keys())" :key="key" :value="qty">
-                  {{qty}}
-                </SfSelectOption>
-              </SfSelect>
-            </SfTableData>
-            <SfTableData>{{$n(orderGetters.getItemPrice(item), 'currency')}}</SfTableData>
-          </SfTableRow>
-        </SfTable>
+      <div v-if="returnRequestOrderId && returnRequestOrderId > 0">
+        <SfButton class="sf-button--text all-orders" @click="returnRequestOrderId = null">All Orders</SfButton>
+        <ReturnRequest :order-id="returnRequestOrderId" />
       </div>
     </SfTab>
     <SfTab title="Returns">
@@ -158,12 +110,17 @@ import {
   SfTable,
   SfButton,
   SfProperty,
-  SfSelect
+  SfSelect,
+  SfTextarea
 } from '@storefront-ui/vue';
 import { computed, ref } from '@vue/composition-api';
-import { useUserOrder, orderGetters, useReturnRequest } from '@vue-storefront/nopcommerce';
+import {
+  useUserOrder,
+  orderGetters
+} from '@vue-storefront/nopcommerce';
 import { AgnosticOrderStatus } from '@vue-storefront/core';
 import { onSSR } from '@vue-storefront/core';
+import ReturnRequest from '../../components/MyAccount/ReturnRequest.vue';
 
 export default {
   name: 'PersonalDetails',
@@ -172,13 +129,14 @@ export default {
     SfTable,
     SfButton,
     SfProperty,
-    SfSelect
+    SfSelect,
+    SfTextarea,
+    ReturnRequest
   },
   setup() {
     const { orders, search } = useUserOrder();
     const currentOrder = ref(null);
-    const currentReturnOrder = ref(null);
-    const { getReturnRequest } = useReturnRequest();
+    const returnRequestOrderId = ref(null);
 
     onSSR(async () => {
       await search();
@@ -223,14 +181,6 @@ export default {
       downloadFile(new Blob([JSON.stringify(order)], {type: 'application/json'}), 'order ' + orderGetters.getId(order) + '.json');
     };
 
-    const handleReturnQuantityChange = (qty, item) => console.log('Change', qty, item);
-
-    const loadOrderReturnQuantity = async (orderId) => {
-      const rr = await getReturnRequest({ orderId });
-      currentReturnOrder.value = rr;
-      currentOrder.value = null;
-    };
-
     return {
       tableHeaders,
       orders: computed(() => orders ? orders.value.results : []),
@@ -240,9 +190,7 @@ export default {
       downloadOrder,
       downloadOrders,
       currentOrder,
-      currentReturnOrder,
-      handleReturnQuantityChange,
-      loadOrderReturnQuantity
+      returnRequestOrderId
     };
   }
 };
@@ -350,3 +298,4 @@ export default {
   }
 
 </style>
+

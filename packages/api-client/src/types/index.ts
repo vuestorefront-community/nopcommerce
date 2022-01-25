@@ -68,3 +68,9 @@ export type ShippingProvider = TODO;
 export type Wishlist = TODO;
 
 export type WishlistItem = TODO;
+
+// MAJAKO_CHANGE
+export type ReturnRequest = TODO;
+export type ReturnRequestItem = TODO;
+export type ReturnRequestReason = TODO;
+export type ReturnRequestAction = TODO;

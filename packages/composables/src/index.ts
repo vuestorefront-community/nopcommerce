@@ -30,6 +30,7 @@ export { userBillingGetters } from './composables/getters/userBillingGetters';
 export { userGetters } from './composables/getters/userGetters';
 export { userShippingGetters } from './composables/getters/userShippingGetters';
 export { wishlistGetters } from './composables/getters/wishlistGetters';
+export { returnRequestGetters } from './composables/getters/returnRequestGetters';
 
 // Types
 export * from './types';

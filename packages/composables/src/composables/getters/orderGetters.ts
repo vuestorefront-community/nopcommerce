@@ -23,7 +23,6 @@ function getPrice(order: Order): number | null {
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 function getItems(order: Order): OrderItem[] {
-  console.log(order);
   return order.items;
 }
 
