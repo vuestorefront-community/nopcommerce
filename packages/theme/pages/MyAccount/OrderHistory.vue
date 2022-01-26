@@ -94,12 +94,7 @@
       </div>
     </SfTab>
     <SfTab title="Returns">
-      <p class="message">
-        This feature is not implemented yet! Please take a look at
-        <br />
-        <SfLink class="message__link" href="#">https://github.com/DivanteLtd/vue-storefront/issues</SfLink>
-        for our Roadmap!
-      </p>
+      <ReturnRequests />
     </SfTab>
   </SfTabs>
 </template>
@@ -121,6 +116,7 @@ import {
 import { AgnosticOrderStatus } from '@vue-storefront/core';
 import { onSSR } from '@vue-storefront/core';
 import ReturnRequest from '../../components/MyAccount/ReturnRequest.vue';
+import ReturnRequests from '../../components/MyAccount/ReturnRequests.vue';
 
 export default {
   name: 'PersonalDetails',
@@ -131,7 +127,8 @@ export default {
     SfProperty,
     SfSelect,
     SfTextarea,
-    ReturnRequest
+    ReturnRequest,
+    ReturnRequests
   },
   setup() {
     const { orders, search } = useUserOrder();

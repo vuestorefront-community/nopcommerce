@@ -5,21 +5,24 @@ import { UseReturnRequest, UseReturnRequestErrors } from '../types';
 export interface UseReturnRequestParams<RETURN_REQUEST, API extends PlatformApi = any> extends FactoryParams<API> {
   getReturnRequest: (context: Context, params: { orderId: number }) => Promise<RETURN_REQUEST>;
   submitReturnRequest: (context: Context, params: { returnRequest: RETURN_REQUEST, form: any }) => Promise<void>;
+  load: (context: Context) => Promise<void>;
 }
 
 export const useReturnRequestFactory = <RETURN_REQUEST, API extends PlatformApi = any>(
   factoryParams: UseReturnRequestParams<API>
 ) => {
   return function useReturnRequest(): UseReturnRequest<RETURN_REQUEST, API> {
+    const returnRequests: Ref<RETURN_REQUEST> = sharedRef([], 'useReturnRequest-returnRequests');
     const loading = sharedRef(false, 'useReturnRequest-loading');
     const error: Ref<UseReturnRequestErrors> = sharedRef({
       getReturnRequest: null,
-      submitReturnRequest: null
+      submitReturnRequest: null,
+      load: null
     }, 'useReturnRequest-error');
 
     const _factoryParams = configureFactoryParams(
       factoryParams,
-      { alias: 'currentReturnRequest', loading, error }
+      { mainRef: returnRequests, alias: 'currentReturnRequest', loading, error }
     );
 
     const getReturnRequest = async ({ orderId }): Promise<RETURN_REQUEST> => {
@@ -61,10 +64,27 @@ export const useReturnRequestFactory = <RETURN_REQUEST, API extends PlatformApi 
       }
     };
 
+    const load = async (): Promise<void> => {
+      Logger.debug('useReturnRequest.load');
+
+      try {
+        loading.value = true;
+        returnRequests.value = await _factoryParams.load();
+        error.value.load = null;
+      } catch (err) {
+        error.value.load = err;
+        Logger.error('useReturnRequest/load', err);
+      } finally {
+        loading.value = false;
+      }
+    };
+
     return {
       api: _factoryParams.api,
       getReturnRequest,
       submitReturnRequest,
+      load,
+      returnRequests: computed(() => returnRequests.value),
       loading: computed(() => loading.value),
       error: computed(() => error.value)
     };

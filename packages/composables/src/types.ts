@@ -30,6 +30,7 @@ export type useUserOrderSearchParams = TODO;
 export interface UseReturnRequestErrors {
   getReturnRequest: Error;
   submitReturnRequest: Error;
+  load: Error;
 }
 export interface UseReturnRequest<
   RETURN_REQUEST,
@@ -37,15 +38,23 @@ export interface UseReturnRequest<
 > extends Composable<API> {
   getReturnRequest(params: { orderId: number }): Promise<RETURN_REQUEST>;
   submitReturnRequest(params: { returnRequest: RETURN_REQUEST, form: any }): Promise<void>;
+  load(): Promise<void>;
+  returnRequests: ComputedProperty<RETURN_REQUEST>;
   error: ComputedProperty<UseReturnRequestErrors>;
   loading: ComputedProperty<boolean>;
 }
 
 export interface ReturnRequestGetters<RETURN_REQUEST, RETURN_REQUEST_ITEM, RETURN_REQUEST_REASON, RETURN_REQUEST_ACTION> {
   getId: (returnRequest: RETURN_REQUEST) => string;
+  getOrderId: (returnRequest: RETURN_REQUEST) => string;
   getItems: (returnRequest: RETURN_REQUEST) => RETURN_REQUEST_ITEM[];
   getAvailableReturnReasons: (returnRequest: RETURN_REQUEST) => RETURN_REQUEST_REASON[];
   getAvailableReturnActions: (returnRequest: RETURN_REQUEST) => RETURN_REQUEST_ACTION[];
+  getReason: (returnRequest: RETURN_REQUEST) => string;
+  getAction: (returnRequest: RETURN_REQUEST) => string;
+  getDate: (returnRequest: RETURN_REQUEST) => string;
+  getComments: (returnRequest: RETURN_REQUEST) => string;
+  getTitle: (returnRequest: RETURN_REQUEST) => string;
   getItemId: (item: RETURN_REQUEST_ITEM) => number;
   getItemSku: (item: RETURN_REQUEST_ITEM) => string;
   getItemName: (item: RETURN_REQUEST_ITEM) => string;

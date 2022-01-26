@@ -21,6 +21,10 @@ const params: UseReturnRequestParams<SubmitReturnRequestModelDto> = {
       }
     };
     await context.$nopcommerce.api.returnRequestReturnRequestSubmitOrderIdPost(request);
+  },
+  load: async (context: Context) => {
+    const response = await context.$nopcommerce.api.returnRequestCustomerReturnRequestsGet();
+    return response.items;
   }
 };
 
