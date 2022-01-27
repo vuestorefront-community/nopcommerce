@@ -15,6 +15,7 @@ export { useUserBilling } from './composables/useUserBilling';
 export { useUserOrder } from './composables/useUserOrder';
 export { useUserShipping } from './composables/useUserShipping';
 export { useWishlist } from './composables/useWishlist';
+export { useReturnRequest } from './composables/useReturnRequest';
 
 // Getters
 export { cartGetters } from './composables/getters/cartGetters';
@@ -29,6 +30,7 @@ export { userBillingGetters } from './composables/getters/userBillingGetters';
 export { userGetters } from './composables/getters/userGetters';
 export { userShippingGetters } from './composables/getters/userShippingGetters';
 export { wishlistGetters } from './composables/getters/wishlistGetters';
+export { returnRequestGetters } from './composables/getters/returnRequestGetters';
 
 // Types
 export * from './types';

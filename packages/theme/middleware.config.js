@@ -4,7 +4,7 @@ module.exports = {
       location: '@vue-storefront/nopcommerce-api/server',
       configuration: {
         api: {
-          url: 'http://localhost:65283'
+          url: 'http://localhost:5000'
         },
         cookies: {
           authenticationCookieName: 'vsf-authentication'
