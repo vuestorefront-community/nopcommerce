@@ -38,7 +38,7 @@
     "@babel/preset-env": "^7.15.0",
     "@nuxt/types": "^2.15.7",
     "@vue/test-utils": "^1.2.2",
-    "babel-jest": "^27.0.6",
+    "babel-jest": "^27.1.0",
     "cypress": "^8.1.0",
     "cypress-pipe": "^2.0.0",
     "cypress-tags": "^0.2.0",
@@ -46,6 +46,6 @@
     "mochawesome": "^6.2.2",
     "mochawesome-merge": "^4.2.0",
     "mochawesome-report-generator": "^5.2.0",
-    "vue-jest": "^4.0.0-0"
+    "vue-jest": "^4.0.1"
   }
 }
