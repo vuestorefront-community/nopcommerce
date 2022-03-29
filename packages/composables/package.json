@@ -16,15 +16,13 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/nopcommerce-api": "~0.0.2",
-    "@vue-storefront/core": "~2.4.1"
+    "@vue-storefront/nopcommerce-api": "~0.0.3",
+    "@vue-storefront/core": "2.x",
+    "@vue/composition-api": "1.x"
   },
   "devDependencies": {
     "rollup-plugin-typescript2": "^0.30.0",
     "@rollup/plugin-node-resolve": "^13.0.0"
-  },
-  "peerDependencies": {
-    "@vue/composition-api": "1.0.0-beta.21"
   },
   "files": [
     "lib/**/*",
