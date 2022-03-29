@@ -1,5 +1,5 @@
 import { CustomQuery, Context, FactoryParams, PlatformApi } from '@vue-storefront/core';
-import { Ref, computed } from '@vue/composition-api';
+import { Ref, computed } from '@nuxtjs/composition-api';
 import { sharedRef, Logger, configureFactoryParams } from '@vue-storefront/core';
 import { UseCategoryProducts, UseCategoryProductsErrors } from '../types/UseCategoryProducts';
 

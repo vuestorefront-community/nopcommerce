@@ -24,6 +24,9 @@
     "rollup-plugin-typescript2": "^0.30.0",
     "@rollup/plugin-node-resolve": "^13.0.0"
   },
+  "peerDependencies": {
+    "@nuxtjs/composition-api": "^0.29.3"
+  },
   "files": [
     "lib/**/*",
 	  "nuxt/**/*"

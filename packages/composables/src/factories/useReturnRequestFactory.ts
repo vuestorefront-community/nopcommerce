@@ -1,5 +1,5 @@
 import { configureFactoryParams, FactoryParams, PlatformApi, sharedRef, Logger, Context } from '@vue-storefront/core';
-import { computed, Ref } from '@vue/composition-api';
+import { Ref, computed } from '@nuxtjs/composition-api';
 import { UseReturnRequest, UseReturnRequestErrors } from '../types';
 
 export interface UseReturnRequestParams<RETURN_REQUEST, API extends PlatformApi = any> extends FactoryParams<API> {
