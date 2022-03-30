@@ -132,7 +132,7 @@
 
 <script>
 import { SfHeading, SfInput, SfButton, SfSelect } from '@storefront-ui/vue';
-import { ref } from '@vue/composition-api';
+import { ref } from '@nuxtjs/composition-api';
 import { onSSR } from '@vue-storefront/core';
 import { useShipping } from '@vue-storefront/nopcommerce';
 import { required, min, digits, email } from 'vee-validate/dist/rules';

@@ -33,7 +33,7 @@
 
 <script>
 import { SfButton, SfRadio } from '@storefront-ui/vue';
-import { ref } from '@vue/composition-api';
+import { ref } from '@nuxtjs/composition-api';
 
 const SHIPPING_METHODS = [{ label: 'Ground', value: 'Ground', description: 'Same day delivery' }];
 

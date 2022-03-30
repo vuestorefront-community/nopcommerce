@@ -134,7 +134,7 @@
 
 <script>
 import { SfHeading, SfInput, SfButton, SfSelect, SfRadio, SfCheckbox } from '@storefront-ui/vue';
-import { ref } from '@vue/composition-api';
+import { ref } from '@nuxtjs/composition-api';
 import { onSSR } from '@vue-storefront/core';
 import { useBilling } from '@vue-storefront/nopcommerce';
 import { required, min, digits, email } from 'vee-validate/dist/rules';

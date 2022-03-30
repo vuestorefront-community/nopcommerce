@@ -112,14 +112,13 @@ import {
 
 import InstagramFeed from '~/components/InstagramFeed.vue';
 import RelatedProducts from '~/components/RelatedProducts.vue';
-import { ref, computed } from '@vue/composition-api';
+import { ref, computed, getCurrentInstance } from '@nuxtjs/composition-api';
 import { useProduct, useCart, productGetters, useReview, reviewGetters } from '@vue-storefront/nopcommerce';
 import { onSSR } from '@vue-storefront/core';
 import LazyHydrate from 'vue-lazy-hydration';
 import cacheControl from './../helpers/cacheControl';
 import ProductAttributes from './../components/ProductAttributes.vue';
 import ProductAddReviewForm from '~/components/ProductAddReviewForm.vue';
-import { getCurrentInstance } from '@vue/composition-api';
 
 export default {
   name: 'Product',

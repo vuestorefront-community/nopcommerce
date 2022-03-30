@@ -17,7 +17,8 @@ export { useUserShipping } from './composables/useUserShipping';
 export { useWishlist } from './composables/useWishlist';
 export { useReturnRequest } from './composables/useReturnRequest';
 export { useSearch } from './composables/useSearch';
-
+export { useStore } from './composables/useStore';
+ 
 // Getters
 export { cartGetters } from './composables/getters/cartGetters';
 export { categoryGetters } from './composables/getters/categoryGetters';

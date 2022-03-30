@@ -1,9 +1,4 @@
-import { getCurrentInstance } from '@vue/composition-api';
-
-const getInstance = () => {
-  const vm = getCurrentInstance();
-  return vm.$root as any;
-};
+import { useRoute, useRouter } from '@nuxtjs/composition-api';
 
 const queryParamsNotFilters = ['page', 'sort', 'itemsPerPage'];
 
@@ -17,18 +12,21 @@ export interface UseUiHelpers {
   isFacetColor: (facet: any) => boolean;
   isFacetCheckbox: (facet: any) => boolean;
   getSearchTermFromUrl: () => void;
+  getSlug: () => string;
 }
 
 export const useUiHelpers: () => UseUiHelpers = () => {
-  const instance = getInstance();
+  const route = useRoute();
+  const router = useRouter();
+  const { query, params } = route.value;
 
   const getFacetsFromURL = () => {
-    const { params, query } = instance.$router.history.current;
-
+    const order = Array.isArray(query.sort) ? query.sort[0] : query.sort;
+    const specs = Array.isArray(query.specs) ? query.specs[0] : query.specs;
     const categorySlug = {
       term: params.slug_1,
-      order: parseInt(query.sort) || 0,
-      specs: query.specs ? decodeURIComponent(query.specs).split(',') : [],
+      order: parseInt(order) || 0,
+      specs: query.specs ? decodeURIComponent(specs).split(',') : [],
       page: query.page || 1,
       pagesize: query.pagesize || 0,
       viewmode: query.viewmode || 'grid'
@@ -43,8 +41,7 @@ export const useUiHelpers: () => UseUiHelpers = () => {
 
   // eslint-disable-next-line
   const changeSorting = (sort) => {
-    const { query } = instance.$router.history.current;
-    instance.$router.push({ query: { ...query, sort } });
+    router.push({ query: { ...query, sort } });
   };
 
   const reduceFilters = (query) => (prev, curr) => {
@@ -56,9 +53,7 @@ export const useUiHelpers: () => UseUiHelpers = () => {
     };
   };
 
-  const getFiltersDataFromUrl = (context, onlyFilters) => {
-    const { query } = context.$router.history.current;
-
+  const getFiltersDataFromUrl = (onlyFilters) => {
     return Object.keys(query)
       .filter((f) => (onlyFilters ? !queryParamsNotFilters.includes(f) : queryParamsNotFilters.includes(f)))
       .reduce(reduceFilters(query), {});
@@ -66,19 +61,19 @@ export const useUiHelpers: () => UseUiHelpers = () => {
 
   // eslint-disable-next-line
   const changeFilters = (filters) => {
-    const array = getFiltersDataFromUrl(instance, false);
+    const array = getFiltersDataFromUrl(false);
     const specs = Object.values<any[]>(filters)
       .flat()
       .join(',');
 
     if (Object.keys(filters).length === 0) {
-      instance.$router.push({
+      router.push({
         query: {
           ...array
         }
       });
     } else {
-      instance.$router.push({
+      router.push({
         query: {
           ...array,
           specs: specs
@@ -89,9 +84,8 @@ export const useUiHelpers: () => UseUiHelpers = () => {
 
   // eslint-disable-next-line
   const changeItemsPerPage = (itemsPerPage) => {
-    const { query } = instance.$router.history.current;
     delete query.page;
-    instance.$router.push({ query: { ...query, itemsPerPage } });
+    router.push({ query: { ...query, itemsPerPage } });
   };
 
   // eslint-disable-next-line
@@ -117,6 +111,10 @@ export const useUiHelpers: () => UseUiHelpers = () => {
     console.warn('[VSF] please implement useUiHelpers.getSearchTermFromUrl.');
   };
 
+  const getSlug = () => {
+    return router.currentRoute.path.replace('/', '');
+  };
+
   return {
     getFacetsFromURL,
     getCatLink,
@@ -126,7 +124,8 @@ export const useUiHelpers: () => UseUiHelpers = () => {
     setTermForUrl,
     isFacetColor,
     isFacetCheckbox,
-    getSearchTermFromUrl
+    getSearchTermFromUrl,
+    getSlug
   };
 };
 

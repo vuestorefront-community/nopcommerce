@@ -80,7 +80,7 @@
 </template>
 <script>
 import { SfSidebar, SfHeading, SfButton, SfIcon, SfProperty, SfPrice, SfCollectedProduct, SfImage, SfQuantitySelector } from '@storefront-ui/vue';
-import { computed } from '@vue/composition-api';
+import { computed } from '@nuxtjs/composition-api';
 import { useCart, useUser, cartGetters } from '@vue-storefront/nopcommerce';
 import { useUiState } from '~/composables';
 

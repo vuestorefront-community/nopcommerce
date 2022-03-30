@@ -89,7 +89,7 @@ import {
   useReturnRequest,
   returnRequestGetters
 } from '@vue-storefront/nopcommerce';
-import { ref, computed } from '@vue/composition-api';
+import { ref, computed } from '@nuxtjs/composition-api';
 import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 import { required } from 'vee-validate/dist/rules';
 

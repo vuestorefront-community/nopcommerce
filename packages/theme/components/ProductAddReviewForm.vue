@@ -47,7 +47,7 @@
   </div>
 </template>
 <script lang="ts">
-import { defineComponent, ref, computed } from '@vue/composition-api';
+import { defineComponent, ref, computed } from '@nuxtjs/composition-api';
 import { useReview, useUser } from '@vue-storefront/nopcommerce';
 import { extend, ValidationObserver, ValidationProvider } from 'vee-validate';
 import { min, oneOf, required } from 'vee-validate/dist/rules';
