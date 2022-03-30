@@ -288,7 +288,7 @@
                 <SfFilter
                   v-for="option in facet.options"
                   :key="`${facet.id}-${option.value}`"
-                  :label="option.id + `${option.count ? ` (${option.count})` : ''}`"
+                  :label="option.value + `${option.count ? ` (${option.count})` : ''}`"
                   :selected="isFilterSelected(facet, option)"
                   class="filters__item"
                   @change="() => selectFilter(facet, option)"
@@ -306,7 +306,7 @@
             <SfFilter
               v-for="option in facet.options"
               :key="`${facet.id}-${option.id}`"
-              :label="option.id"
+              :label="option.value + `${option.count ? ` (${option.count})` : ''}`"
               :selected="isFilterSelected(facet, option)"
               class="filters__item"
               @change="() => selectFilter(facet, option)"
@@ -394,7 +394,7 @@ export default {
 
     const selectedFilters = ref({});
     const setSelectedFilters = () => {
-      if (!facets.value.length || Object.keys(selectedFilters.value).length) return;
+      if (!facets.value.length) return;
       selectedFilters.value = facets.value.reduce((prev, curr) => ({
         ...prev,
         [curr.id]: curr.options
