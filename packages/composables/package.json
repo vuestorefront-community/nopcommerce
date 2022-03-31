@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/nopcommerce",
-  "version": "0.0.7",
+  "version": "0.1.7",
   "private": false,
   "sideEffects": false,
   "main": "lib/index.cjs.js",
@@ -16,7 +16,7 @@
     "update:update": "ncu -u"
   },
   "dependencies": {
-    "@vue-storefront/nopcommerce-api": "~0.0.3",
+    "@vue-storefront/nopcommerce-api": "~0.1.4",
     "@vue-storefront/core": "2.x",
     "@vue/composition-api": "1.x"
   },

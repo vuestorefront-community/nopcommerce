@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/nopcommerce-api",
-  "version": "0.0.4",
+  "version": "0.1.4",
   "private": false,
   "sideEffects": false,
   "server": "server/index.js",
