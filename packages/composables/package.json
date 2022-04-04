@@ -1,6 +1,6 @@
 {
   "name": "@vue-storefront/nopcommerce",
-  "version": "0.1.7",
+  "version": "0.1.8",
   "private": false,
   "sideEffects": false,
   "main": "lib/index.cjs.js",
