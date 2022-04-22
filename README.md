@@ -18,16 +18,6 @@ This integration is developed by the superheroes from [Majako](https://www.majak
 </div>
 <hr />
 
-# Boilerplate for Vue Storefront 2 eCommerce integration
-
-This is a template, to use it you must rename the project changing the `{YOUR INTEGRATION NAME}` to the name of the integration you are developing. The name must be in lowercase and without any special characters.
-
-```sh
-grep -rl 'nopcommerce' ./ | xargs sed -i '' 's/nopcommerce/{YOUR INTEGRATION NAME}/g'
-```
-
----
-
 <!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
 <!-- ALL-CONTRIBUTORS-BADGE:END -->
 
