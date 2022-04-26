@@ -27,6 +27,20 @@ const params: UseCartFactoryParams<MiniShoppingCartModelDto, MiniShoppingCartIte
         }
       };
 
+      for (const [key, value] of Object.entries(customQuery)) {
+        if (Array.isArray(value)) {
+          model.requestBody = {
+            ...model.requestBody,
+            [key]: value.join(',')
+          };
+        } else {
+          model.requestBody = {
+            ...model.requestBody,
+            [key]: value
+          };
+        }
+      }
+
       const response: AddProductToCartResponse = await context.$nopcommerce.api.shoppingCartAddProductToCartFromDetailsProductIdPost(model);
       return response && response.model ? response.model : currentCart;
     } else {
